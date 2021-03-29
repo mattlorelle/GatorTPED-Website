@@ -14,12 +14,11 @@ import Calendar from "../pages/Calendar";
 import Contact from "../pages/Contact";
 import EBoard from "../pages/EBoard";
 import Faq from "../pages/Faq";
-import EditProfile from "../pages/EditProfile";
 import SubmitPost from "../pages/SubmitPost";
-import Login from "../pages/Login";
-import Signup from "../pages/Register";
-import PrivateRoute from "../private-route/PrivateRoute";
-import Dashboard from "../dashboard/Dashboard";
+import Login from "../authentication/Login";
+import Signup from "../authentication/Register";
+import PrivateRoute from "../private/PrivateRoute";
+import Dashboard from "../private/Dashboard";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -38,7 +37,7 @@ if (localStorage.jwtToken) {
       // Redirect to login
       window.location.href = "./login";
     }
-  }
+}
 
 export default function Routes() {
 
@@ -50,12 +49,11 @@ export default function Routes() {
             <Route exact path="/contact" render={props => <Contact {...props} />} />
             <Route exact path="/eboard" render={props => <EBoard {...props} />} />
             <Route exact path="/faq" render={props => <Faq {...props} />} />
-            <Route exact path="/editprofile" render={props => <EditProfile {...props} />} />
-            <Route exact path="/submitpost" render={props => <SubmitPost {...props} />} />
             <Route exact path="/login" render={props => <Login {...props} />} />
             <Route exact path="/signup" render={props => <Signup {...props} />} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/submitpost" component={SubmitPost} />
             </Switch>
         </Switch>
     );

@@ -1,12 +1,12 @@
 import React from 'react';
-import {Typography} from '@material-ui/core';
 
 const Calendar = () => {
+    
     return (
-        <main> 
-            <Typography variant="h6">This is the Calendar Page</Typography>
-        </main>
-    );
-};
+        <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}}>
+            THIS IS THE CALENDAR PAGE
+        </div>
+    )
+}
 
 export default Calendar;
