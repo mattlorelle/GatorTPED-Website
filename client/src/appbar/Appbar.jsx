@@ -1,6 +1,6 @@
 //react imports
 import React, { useState, useEffect } from 'react';
-import { withRouter, useLocation } from 'react-router-dom';
+import { useHistory, withRouter, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 
 //material ui core imports
@@ -148,10 +148,11 @@ const Appbar = (props) => {
     const theme = useTheme();
     
     //history used for subpage routing
-    const { history } = props;
+    
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
+    const history = useHistory();
     const location = useLocation();
     
     const [open, setOpen] = React.useState(false); //Drawer
@@ -181,6 +182,35 @@ const Appbar = (props) => {
       }
       prevOpen.current = open;
     }, [open]);
+
+    //logout
+    const logout = () => {
+      dispatch({ type: 'LOGOUT' });
+
+      history.push('/');
+
+      setUser(null);
+    };
+
+    useEffect(() => {
+      const token = user?.token;
+  
+      if (token) {
+        const decodedToken = decode(token);
+  
+        if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+      }
+  
+      setUser(JSON.parse(localStorage.getItem('profile')));
+    }, [location]);
+
+    const token = user?.token;
+
+
+
+
+
+
 
     //list of objects that will be displayed when sidebar swings out, will be dereferenced later
     const itemsList = [
@@ -214,44 +244,47 @@ const Appbar = (props) => {
           icon: <LiveHelpIcon className={classes.icon}/>,
           onClick: () => history.push('/faq')
       },
-      {
+    ]
+
+
+    if(token) {
+      itemsList.push({
         text: 'Edit Profile',
         icon: <EditIcon className={classes.icon}/>,
         onClick: () => history.push('/dashboard')
-    },
-    {
-      text: 'Submit Post', 
-      icon: <PublishIcon className={classes.icon}/>,
-      onClick: () => history.push('/submitpost')
+      });
+      itemsList.push({
+        text: 'Submit Post', 
+        icon: <PublishIcon className={classes.icon}/>,
+        onClick: () => history.push('/submitpost')
+      });
     }
-    ]
 
-    const logout = () => {
 
-      dispatch({ type: actionType.LOGOUT });
-  
-      history.push('/auth');
-  
-      setUser(null);
-    };
+    // const logout = () => {
 
-    useEffect(() => {
-      const token = user?.token;
+    //   dispatch({ type: actionType.LOGOUT });
   
-      if (token) {
-        const decodedToken = decode(token);
+    //   history.push('/auth');
   
-        if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-      }
-  
-      setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [location]);
+    //   setUser(null);
+    // };
+
+    
+
+
 
     //list of objects that will be displayed in the drop down menu
-    const menuItems = [
-      {text: 'Login', onClick: () => history.push('/auth')},
-      {text: 'Profile', onClick: () => history.push('/dashboard')},  {text: 'Logout', onClick: logout}
+    const menuItems = [    
     ]
+
+    if(token) {
+      menuItems.push({text: 'Profile', onClick: () => history.push('/dashboard')});
+      menuItems.push({text: 'Logout', onClick: logout});
+    }
+    else {
+      menuItems.push({text: 'Login', onClick: () => history.push('/auth')});
+    }
 
     
     return (

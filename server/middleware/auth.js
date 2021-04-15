@@ -1,28 +1,35 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
-const secret = 'test';
+//wants to like a post
+//click a like button (must see if permissions to like pass) => auth middleware used to check (confirms or denies it) => only confirmed will the action be allowed
 
+//middleware utilizes next (do something then move on to the next thing)
 const auth = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization.split(" ")[1];
-    const isCustomAuth = token.length < 500;
+    //checks to see if token is valid when a user tries to like or delete a post, or just interact with the website
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const isCustomAuth = token.length < 500; //implies that it is our own, otherwise it is google
+        
+        let decodedData;
 
-    let decodedData;
+        if(token && isCustomAuth) {
+            decodedData = jwt.verify(token, 'test'); //needs the secret string when creating a token
 
-    if (token && isCustomAuth) {      
-      decodedData = jwt.verify(token, secret);
+            req.userId = decodedData?.id;
+        } 
+        // else { //for the google token
+        //     decodedData = jwt.decode(token);
 
-      req.userId = decodedData?.id;
-    } else {
-      decodedData = jwt.decode(token);
+        //     req.userId = decodedData?.sub; //sub is name for a specific id (primary key essentially to differentiate users)
+        // }
 
-      req.userId = decodedData?.sub;
-    }    
+        next();
 
-    next();
-  } catch (error) {
-    console.log(error);
-  }
-};
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export default auth;
+
+//auth middleware is used in the routes

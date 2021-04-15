@@ -104,12 +104,22 @@
 // */
 import React from 'react'
 
+const user = JSON.parse(localStorage.getItem('profile'));
+const token = user?.token;
+
 const Dashboard = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+
+    return (
+      <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}}>
+              THIS IS THE EDIT PROFILE PAGE
+              Will have an editable form that allows particular users 
+              to edit information about their profile in the database
+              by editing the schema (name, major, grad year, position, etc.)
+      </div>
+    )
+  
+
+
 }
 
 export default Dashboard
