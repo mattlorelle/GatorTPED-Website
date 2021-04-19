@@ -8,53 +8,55 @@ import { useDispatch } from 'react-redux';
 import { deletePost } from '../../../actions/posts';
 import useStyles from './styles';
 
+import {
+  CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle
+} from 'reactstrap';
+
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
 
-  // const Likes = () => {
-  //   if (post.likes.length > 0) {
-  //     return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
-  //       ? (
-  //         <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }</>
-  //       ) : (
-  //         <><ThumbUpAltOutlined fontSize="small" />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}</>
-  //       );
-  //   }
-
-  //   return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
-  // };
+  
 
   return (
+    // <div>
+    //   <Card className={classes.card}>
+    //     <CardImg top width="100%" src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt="Card image cap" />
+    //     <CardBody>
+    //       <CardTitle tag="h3"> {post.title} </CardTitle>
+    //       <CardText tag="h4"> {post.major} </CardText>
+    //       <CardText tag="h5"> {post.message} </CardText>
+    //       <CardText tag="h5"> {moment(post.createdAt).fromNow()} </CardText>
+    //     </CardBody>
+    //   </Card>
+    // </div>
+
     <Card className={classes.card}>
       <CardMedia className={classes.media} image={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} title={post.title} />
       <div className={classes.overlay}>
         <Typography variant="h6">{post.name}</Typography>
+        <Typography className={classes.major} gutterBottom variant="h6" component="h3">{post.major}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
       </div>
-      { user?.result?._id === post?.creator && (
-        <div className={classes.overlay2}>
-          <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="default" /></Button>
-        </div>
-      )}
-      <div className={classes.details}>
-        <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
+      {(user?.result?._id === post?.creator) && (
+      <div className={classes.overlay2}>
+        <Button onClick={() => setCurrentId(post._id)} style={{ color: 'white' }} size="small">
+          <MoreHorizIcon fontSize="default" />
+        </Button>
       </div>
-      <Typography className={classes.title} gutterBottom variant="h5" component="h2">{post.title}</Typography>
+      )}
+      <Typography className={classes.title} gutterBottom variant="h4" component="h1">{post.title}</Typography>
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
+        <Typography variant="body1" color="textSecondary" component="p">{post.message}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        {/* <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
-            <Likes />
-          </Button> */}
-          {user?.result?._id === post?.creator && (
-              <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
-                <DeleteIcon fontSize="small" /> Delete
-              </Button>
-          )}
-        
+        {(user?.result?._id === post?.creator || user?.result?.isAdmin) && (
+        <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
+          <DeleteIcon fontSize="small" /> Delete
+        </Button>
+        )}
       </CardActions>
     </Card>
   );

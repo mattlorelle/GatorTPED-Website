@@ -22,11 +22,11 @@ export default function BottomAppBar() {
   return (
     <div>
       <CssBaseline />
-      <AppBar className={classes.appBar}>
+      {/* <AppBar className={classes.appBar}> */}
         <Toolbar>
 
         </Toolbar>
-      </AppBar>
+      {/* </AppBar> */}
     </div>
   );
 }

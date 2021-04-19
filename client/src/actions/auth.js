@@ -24,3 +24,16 @@ export const signup = (formData, router) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const updateProfile = (formData, router) => async (dispatch) => {
+  try {
+    const { data } = await api.updateProfile(formData);
+    //console.log(formData);
+
+    dispatch({ type: AUTH, data });
+
+    router.push('/');
+  } catch (error) {
+    console.log(error);
+  }
+};

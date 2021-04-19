@@ -12,13 +12,17 @@ API.interceptors.request.use((req) => {
 });
 
 export const fetchPosts = () => API.get('/posts');
+export const fetchFeaturedPosts = () => API.get('/posts/featured');
 export const createPost = (newPost) => API.post('/posts', newPost);
-//export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);
 export const deletePost = (id) => API.delete(`/posts/${id}`);
 
+export const fetchPostsEB = () => API.get('/postsEB');
+export const createPostEB = (newPostEB) => API.post('/postsEB', newPostEB);
+export const updatePostEB = (id, updatedPostEB) => API.patch(`/postsEB/${id}`, updatedPostEB);
+export const deletePostEB = (id) => API.delete(`/postsEB/${id}`);
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
-
+export const updateProfile = (formData) => API.post('/user/update', formData);
 

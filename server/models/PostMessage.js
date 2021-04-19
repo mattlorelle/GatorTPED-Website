@@ -5,8 +5,9 @@ const postSchema = mongoose.Schema({
     message: String,
     name: String,
     creator: String,
-    tags: [String],
     selectedFile: String,
+    isFeaturedPost: Boolean,
+    major: String,
     createdAt: {
         type: Date,
         default: new Date(),

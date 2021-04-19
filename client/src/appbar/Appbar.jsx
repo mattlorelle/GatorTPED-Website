@@ -53,21 +53,21 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flex: 2
   },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeInOut,
-      duration: theme.transitions.duration.shortest,
-    }),
-    backgroundColor: "blue"
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeInOut,
-      duration: theme.transitions.duration.shortest,
-    }),
-    marginRight: drawerWidth,
-  },
+  // appBar: {
+  //   transition: theme.transitions.create(['margin', 'width'], {
+  //     easing: theme.transitions.easing.easeInOut,
+  //     duration: theme.transitions.duration.shortest,
+  //   }),
+  //   backgroundColor: "blue"
+  // },
+  // appBarShift: {
+  //   width: `calc(100% - ${drawerWidth}px)`,
+  //   transition: theme.transitions.create(['margin', 'width'], {
+  //     easing: theme.transitions.easing.easeInOut,
+  //     duration: theme.transitions.duration.shortest,
+  //   }),
+  //   marginRight: drawerWidth,
+  // },
   title: {
     flexGrow: 1, align: 'center'
   },
@@ -204,10 +204,15 @@ const Appbar = (props) => {
       setUser(JSON.parse(localStorage.getItem('profile')));
     }, [location]);
 
+
+
+
+
+    
     const token = user?.token;
 
 
-
+    console.log(user);
 
 
 

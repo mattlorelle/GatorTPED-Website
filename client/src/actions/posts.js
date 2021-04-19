@@ -12,6 +12,16 @@ export const getPosts = () => async (dispatch) => {
   }
 };
 
+export const getFeaturedPosts = () => async (dispatch) => {
+  try {
+    const { data } = await api.fetchFeaturedPosts();
+
+    dispatch({ type: FETCH_ALL, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post);
@@ -31,16 +41,6 @@ export const updatePost = (id, post) => async (dispatch) => {
     console.log(error.message);
   }
 };
-
-// export const likePost = (id) => async (dispatch) => {
-//   try {
-//     const { data } = await api.likePost(id);
-
-//     dispatch({ type: LIKE, payload: data });
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
 
 export const deletePost = (id) => async (dispatch) => {
   try {
