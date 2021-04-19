@@ -52,13 +52,17 @@ export const signup = async (req, res) => {
 
 export const updateProfile = async(req,res) => {
 
-  const { email, firstName, lastName, gradYear, major, clubPosition } = req.body;
+  const { email, password, firstName, lastName, gradYear, major, clubPosition } = req.body;
 
   try {
 
     const oldUser = await UserModel.findOne({ email });
     
-    oldUser = await UserModel.updateOne({ email, name: `${firstName} ${lastName}`, major: major, gradYear: gradYear, clubPosition: clubPosition });
+    const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
+
+    if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
+    
+    oldUser = await UserModel.updateOne({ email: email, name: `${firstName} ${lastName}`, major: major, gradYear: gradYear, clubPosition: clubPosition });
 
     const token = jwt.sign( { email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "1h" } );
 

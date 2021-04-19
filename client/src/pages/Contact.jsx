@@ -102,7 +102,7 @@ const Contact = () => {
 
     return (
         <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="sm">
                 <div className={classes.bgpaper}>
                     <Paper elevation={10}>
                         <div className={classes.paper}>

@@ -42,7 +42,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
-import * as actionType from '../constants/actionTypes';
 
 
 const drawerWidth = '200px'; //const variable for sidebar width
@@ -53,21 +52,21 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flex: 2
   },
-  // appBar: {
-  //   transition: theme.transitions.create(['margin', 'width'], {
-  //     easing: theme.transitions.easing.easeInOut,
-  //     duration: theme.transitions.duration.shortest,
-  //   }),
-  //   backgroundColor: "blue"
-  // },
-  // appBarShift: {
-  //   width: `calc(100% - ${drawerWidth}px)`,
-  //   transition: theme.transitions.create(['margin', 'width'], {
-  //     easing: theme.transitions.easing.easeInOut,
-  //     duration: theme.transitions.duration.shortest,
-  //   }),
-  //   marginRight: drawerWidth,
-  // },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeInOut,
+      duration: theme.transitions.duration.shortest,
+    }),
+    backgroundColor: "blue"
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeInOut,
+      duration: theme.transitions.duration.shortest,
+    }),
+    marginRight: drawerWidth,
+  },
   title: {
     flexGrow: 1, align: 'center'
   },

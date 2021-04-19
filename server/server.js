@@ -7,6 +7,9 @@ import postRoutes from './routes/posts.js';
 import userRouter from "./routes/user.js";
 import EBpostRoutes from './routes/postsEB.js';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 const app = express();
 
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
@@ -17,7 +20,7 @@ app.use('/posts', postRoutes);
 app.use("/user", userRouter);
 app.use('/postsEB', EBpostRoutes);
 
-const CONNECTION_URL = 'mongodb+srv://TPEDuser:TPEDuser@cluster0.d6wuw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const CONNECTION_URL = process.env.connectionuri;
 const PORT = process.env.PORT|| 5000;
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

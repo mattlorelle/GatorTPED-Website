@@ -1,25 +1,3 @@
-// import React from 'react';
-
-// const Home = () => {
-
-//     return (
-//         <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'}}>
-//             THIS IS THE HOME PAGE
-//             DISPLAY ALL RELEVANT CLUB INFO
-//             SHOW FEATURED POSTS (add a featured functionality for admins)
-//         </div>
-//     )
-// };
-
-// export default Home;
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import { Container, Grow, Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
