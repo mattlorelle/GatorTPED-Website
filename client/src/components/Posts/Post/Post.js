@@ -4,8 +4,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 
-import { deletePost } from '../../../actions/posts';
+import { deletePost, switchFeatured } from '../../../actions/posts';
 import useStyles from './styles';
 
 import {
@@ -40,13 +41,6 @@ const Post = ({ post, setCurrentId }) => {
         <Typography className={classes.major} gutterBottom variant="h6" component="h3">{post.major}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
       </div>
-      {(user?.result?._id === post?.creator) && (
-      <div className={classes.overlay2}>
-        <Button onClick={() => setCurrentId(post._id)} style={{ color: 'white' }} size="small">
-          <MoreHorizIcon fontSize="default" />
-        </Button>
-      </div>
-      )}
       <Typography className={classes.title} gutterBottom variant="h4" component="h1">{post.title}</Typography>
       <CardContent>
         <Typography variant="body1" color="textSecondary" component="p">{post.message}</Typography>
@@ -56,6 +50,13 @@ const Post = ({ post, setCurrentId }) => {
         <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
           <DeleteIcon fontSize="small" /> Delete
         </Button>
+        )}
+      </CardActions>
+      <CardActions>
+      {(user?.result?.isAdmin) && (
+        <Button size="small" color="secondary" onClick={() => dispatch(switchFeatured(post._id, post.isFeaturedPost))}>
+             <StarOutlineIcon fontSize="small" /> Change Feature Status 
+          </Button>
         )}
       </CardActions>
     </Card>

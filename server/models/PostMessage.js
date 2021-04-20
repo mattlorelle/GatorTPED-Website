@@ -6,7 +6,7 @@ const postSchema = mongoose.Schema({
     name: String,
     creator: String,
     selectedFile: String,
-    isFeaturedPost: Boolean,
+    isFeaturedPost: {type: Boolean},
     major: String,
     createdAt: {
         type: Date,

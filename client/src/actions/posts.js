@@ -22,6 +22,18 @@ export const getFeaturedPosts = () => async (dispatch) => {
   }
 };
 
+export const switchFeatured = (id, isFeaturedPost) => async (dispatch) => {
+  try {
+    console.log(id);
+    console.log(isFeaturedPost);
+    const { data } = await api.switchFeatured(id, isFeaturedPost);
+    
+    dispatch({ type: UPDATE, payload: data });
+  } catch (error) {
+      console.log(error);
+  }
+};
+
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post);

@@ -14,7 +14,7 @@ const Home = () => {
     dispatch(getFeaturedPosts());
   }, [currentId, dispatch]);
 
-  console.log();
+  
 
   return (
     <Grow in>

@@ -8,17 +8,17 @@ import { useDispatch } from 'react-redux';
 import { getPosts } from '../actions/posts';
 import Posts from '../components/Posts/Posts';
 
-const useStyles = makeStyles((theme) => ({
+// const useStyles = makeStyles((theme) => ({
 
-  root: {
-    position: 'fixed',
-    width: '100%',
-    height: '100%',
-    left: 0,
-    top: '20%',
-    zIndex: 10,
-  }
-}));
+//   root: {
+//     position: 'fixed',
+//     width: '100%',
+//     height: '100%',
+//     left: 0,
+//     top: '20%',
+//     zIndex: 10,
+//   }
+// }));
 
 
 const ProjectSearch = () => {
@@ -26,7 +26,7 @@ const ProjectSearch = () => {
     const [currentId, setCurrentId] = useState(0);
     const dispatch = useDispatch();
 
-    const classes = useStyles;
+    // const classes = useStyles;
 
     useEffect(() => {
       dispatch(getPosts());

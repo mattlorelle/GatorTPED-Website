@@ -211,9 +211,6 @@ const Appbar = (props) => {
     const token = user?.token;
 
 
-    console.log(user);
-
-
 
 
     //list of objects that will be displayed when sidebar swings out, will be dereferenced later

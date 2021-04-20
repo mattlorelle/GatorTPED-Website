@@ -25,6 +25,32 @@ export const getFeaturedPosts = async (req, res) => {
     }
 }
 
+export const switchFeatured = async (req, res) => {
+    try {
+
+        
+        console.log("This is a request: ", req.params, req.body);
+
+        const { id } = req.params;
+        const { isFeaturedPost } = req.body;
+
+        console.log('before change:', isFeaturedPost);
+        //if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+        
+        var changer = !isFeaturedPost;
+        console.log('AFter change:', changer);
+        //await PostMessage.findByIdAndUpdate(id, {$set: { isFeaturedPost: changer }});
+
+        await PostMessage.findByIdAndUpdate(id, {$set: { isFeaturedPost: changer }});
+
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+
+
+}
+
 export const getPost = async (req, res) => { 
     const { id } = req.params;
 
